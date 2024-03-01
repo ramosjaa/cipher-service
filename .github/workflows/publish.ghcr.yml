@@ -1,11 +1,14 @@
-name: Run The Tests
+name: Run the tests, Build the image
+
 on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
+
 jobs:
     build:
 
@@ -23,5 +26,6 @@ jobs:
             pip install -r requirements.txt
         - name: Unit Testing
           run: |
-            cd ciphers_project
-            python3 manage.py test
+            docker login --username ramosjaa --password ${{secrets.ACCESS_TOKEN}} ghcr.io
+            docker build -t ghcr.io/ramosjaa/cipher-service:latest --file Dockerfile .
+            docker push ghcr.io/ramosjaa/cipher-service:latest
