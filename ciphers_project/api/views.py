@@ -3,6 +3,7 @@ from .ciphers import caesar_encode
 def greetings(request):
     result = {"message": "Welcome to cipher service!"}
     return JsonResponse(result)
+
 def encode(request, plaintext, shift):
     parameters = dict(request.GET)
     print(parameters)
